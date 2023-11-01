@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { User } from './interfaces/user.interface';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'foro-aval-test';
+
+  constructor(
+    private userService: UserService
+  ){}
+
+  saveNewUser(user:User): void {
+
+  }
+
 }
