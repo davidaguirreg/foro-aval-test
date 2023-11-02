@@ -7,7 +7,7 @@
 </nav>
 <div class="container w-50">
   <h1 class="text-center"> Registro de Usuario</h1>
-  <form action="">
+  <form action="" (ngSubmit)="saveNewUser(newUser)">
     <div class="row">
       <div class="col-12 mb-3">
         <label for="name" class="form-label">Nombre:</label>
@@ -20,8 +20,41 @@
         <div id="imageHelp" class="form-text">Ingresa un enlace a una imagen para tu perfil</div>
       </div>
       <div class="text-center my-2">
-        <button type="submit" class="btn btn-primary w-25" (click)="saveNewUser(newUser)">Guardar</button>
+        <button type="submit" class="btn btn-primary w-25">Guardar</button>
       </div>
     </div>
   </form>
+</div>
+<div class="container w-60">
+  <h1 class="text-center"> Foro de Aval Buró</h1>
+  <form action="">
+    <div class="row">
+      <div class="col-3 text-center my-auto">
+        <img [src]="newUser.profileImage" style="width: 75%;" class="img-thumbnail rounded-circle">
+        <h5>{{newUser.name}}</h5>
+      </div>
+      <div class="col-5 my-auto">
+        <label for="imageLink" class="form-label text-left">Comentario:</label>
+        <textarea class="form-control" id="userComment" name="userComment" aria-describedby="Comment for Aval Buro">
+        </textarea>
+        <div id="imageHelp" class="form-text">Deja tu comentario</div>
+      </div>
+      <div class="col-4 my-auto">
+        <button type="submit" class="btn btn-primary w-50" (click)="saveUserComment(comment)">Enviar</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container w-60 mt-3">
+    <div class="row border py-4 my-3" *ngFor="let commentUnit of commentsList">
+      <div class="col-3 text-center my-auto">
+        <img [src]="commentUnit.user.profileImage" style="width: 75%;" class="img-thumbnail rounded-circle">
+        <h5>{{commentUnit.user.name}}</h5>
+      </div>
+      <div class="col-9">
+        <p id="userComment" name="userComment" aria-describedby="Comment for Aval Buro">
+          {{commentUnit.message}}
+        </p>
+      </div>
+    </div>
 </div>
