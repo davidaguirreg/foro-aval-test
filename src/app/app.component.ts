@@ -9,12 +9,17 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
 
+  public newUser:User = {
+    name: 'Default',
+    profileImage: 'User'
+  }
+
   constructor(
     private userService: UserService
   ){}
 
   saveNewUser(user:User): void {
-
+    this.userService.addNewUser(user);
   }
 
 }
