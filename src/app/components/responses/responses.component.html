@@ -1,5 +1,14 @@
 <div class="container">
-  <button type="button" class="btn btn-primary my-4" >Agregar Respuesta </button>
+  <form class="form-control" (ngSubmit)="saveResponseParent(responseToParent)">
+    <div class="row">
+      <div class="col-4 order-last">
+        <button type="submit" class="btn btn-primary my-4" >Agregar Respuesta </button>
+      </div>
+      <div class="col-8 mb-2">
+        <textarea [(ngModel)]="responseToParent.message" class="form-control" [name]="'responseParent'+commentsParentList[iParentComment].user.name.slice(0,3)+iParentComment" [id]="'responseParent'+commentsParentList[iParentComment].user.name.slice(0,3)+iParentComment" cols="50" rows="3"></textarea>
+      </div>
+    </div>
+  </form>
 </div>
 <div class="accordion" id="accordionAnswers" *ngIf="commentsParentList[iParentComment].response.length>0">
   <div class="accordion-item">
@@ -21,7 +30,14 @@
             </p>
           </div>
           <div class="container" *ngIf="answer.response.length===0">
-            <button type="button" class="btn btn-primary my-4" >Agregar Respuesta </button>
+            <div class="row">
+              <div class="col-4 order-last">
+                <button type="button" class="btn btn-primary my-4" >Agregar Respuesta </button>
+              </div>
+              <div class="col-8 mb-2">
+                <textarea [(ngModel)]="responseToChild.message" class="form-control" [name]="'responseChild'+commentsParentList[iParentComment].response[j].user.name.slice(0,3)+j" [id]="'responseChild'+commentsParentList[iParentComment].response[j].user.name.slice(0,3)+j" cols="50" rows="3"></textarea>
+              </div>
+            </div>
           </div>
           <div class="container" *ngIf="answer.response.length>0">
             <app-responses [commentsParentList]="commentsParentList[iParentComment].response" [iParentComment]="j"></app-responses>

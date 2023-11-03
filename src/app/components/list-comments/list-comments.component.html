@@ -1,4 +1,4 @@
-<app-insert-comment></app-insert-comment>
+<app-insert-comment (onSaveComment)="onSavedNewComment($event)"></app-insert-comment>
 <div class="container w-60 mt-3">
   <div class="row border py-4 my-3" *ngFor="let commentUnit of commentsList; let i = index">
     <div class="col-3 text-center my-auto">
@@ -10,6 +10,6 @@
         {{commentUnit.message}}
       </p>
     </div>
-    <app-responses [commentsParentList]="commentsList" [iParentComment]="i"></app-responses>
+    <app-responses [commentsParentList]="commentsList" [iParentComment]="i" (onNewParentResponse)="onNewResponseSaved($event)" ></app-responses>
   </div>
 </div>

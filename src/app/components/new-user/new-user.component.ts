@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,11 +15,16 @@ export class NewUserComponent {
   }
 
   constructor(
-    private userService:UserService
+    private userService:UserService,
+    private router:Router
   ){}
 
   saveNewUser(user: User): void {
-    this.userService.addNewUser(user);
+    const userSaved = this.userService.addNewUser(user);
+    this.router.navigate(['forum']);
+    // if(userSaved){
+    //   this.router.navigate(['forum']);
+    // }
   }
 
 

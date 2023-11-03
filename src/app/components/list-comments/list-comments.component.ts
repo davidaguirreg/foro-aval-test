@@ -43,4 +43,12 @@ export class ListCommentsComponent {
       response: []
     }
   ]
+
+  onSavedNewComment(comment:Comment) {
+    this.commentsList.unshift(comment);
+  }
+
+  onNewResponseSaved( commentUpdated:Comment ):void {
+    this.commentsList[commentUpdated.id!].response.unshift(commentUpdated);
+  }
 }
