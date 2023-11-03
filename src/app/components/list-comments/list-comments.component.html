@@ -1,0 +1,14 @@
+<div class="container w-60 mt-3">
+  <div class="row border py-4 my-3" *ngFor="let commentUnit of commentsList; let i = index">
+    <div class="col-3 text-center my-auto">
+      <img [src]="commentUnit.user.profileImage" style="width: 75%;" class="img-thumbnail rounded-circle">
+      <h5>{{commentUnit.user.name}}</h5>
+    </div>
+    <div class="col-9">
+      <p id="userComment" name="userComment" aria-describedby="Comment for Aval Buro">
+        {{commentUnit.message}}
+      </p>
+    </div>
+    <app-responses [commentsParentList]="commentsList" [iParentComment]="i"></app-responses>
+  </div>
+</div>
