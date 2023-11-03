@@ -1,0 +1,20 @@
+<div class="container w-50">
+  <h1 class="text-center"> Registro de Usuario</h1>
+  <form action="" (ngSubmit)="saveNewUser(newUser)">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <label for="name" class="form-label">Nombre:</label>
+        <input type="text" class="form-control"  [(ngModel)]="newUser.name" id="name" name="name" aria-describedby="name">
+        <div id="nameHelp" class="form-text">Ingresa tu nombre y apellido</div>
+      </div>
+      <div class="col-12">
+        <label for="imageLink" class="form-label">URL de imagen de perfil:</label>
+        <input type="text" class="form-control" [(ngModel)]="newUser.profileImage" id="imageLink" name="imageLink" aria-describedby="URL for image">
+        <div id="imageHelp" class="form-text">Ingresa un enlace a una imagen para tu perfil</div>
+      </div>
+      <div class="text-center my-2">
+        <button type="submit" class="btn btn-primary w-25">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ResponsesComponent } from './components/responses/responses.component';
 import { ListCommentsComponent } from './components/list-comments/list-comments.component';
+import { NewUserComponent } from './components/new-user/new-user.component';
+import { InsertCommentComponent } from './components/insert-comment/insert-comment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResponsesComponent,
-    ListCommentsComponent
+    ListCommentsComponent,
+    NewUserComponent,
+    InsertCommentComponent
   ],
   imports: [
     BrowserModule,
