@@ -2,5 +2,6 @@ import { User } from "./user.interface";
 
 export interface Comment {
   user: User;
-  message: string
+  message: string;
+  response: Comment[];
 }
