@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Comment } from '../../interfaces/comment.interface';
+import { User } from 'src/app/interfaces/user.interface';
+import { CommentService } from 'src/app/services/comment.service';
 @Component({
   selector: 'app-list-comments',
   templateUrl: './list-comments.component.html',
@@ -44,11 +46,37 @@ export class ListCommentsComponent {
     }
   ]
 
+  @Input()
+  public userRegistered:User = {
+    name: 'Default',
+    profileImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkEWOkvSGPFJ2dbsdAosboiMPjnyFSf82SUfjwsOZ3v7ljoa6s5ONaT0KiZdtonYY_cP8&usqp=CAU'
+  }
+
+  public responseToParent:Comment = {
+    user: this.userRegistered,
+    message: 'Default',
+    response: []
+  }
+
+  constructor(
+    private commentService:CommentService
+  ) {}
+
   onSavedNewComment(comment:Comment) {
     this.commentsList.unshift(comment);
   }
 
   onNewResponseSaved( commentUpdated:Comment ):void {
     this.commentsList[commentUpdated.id!].response.unshift(commentUpdated);
+  }
+  saveResponseParent( response:Comment, parentId:number ) : void {
+    console.log({response});
+    let commentUpdated = this.commentService.insertResponseToComment(response,parentId);
+    commentUpdated = {
+      ...response,
+      id: parentId
+    }
+    this.commentsList[commentUpdated.id!].response.unshift(commentUpdated);
+    // this.onNewParentResponse.emit(commentUpdated);
   }
 }

@@ -10,6 +10,22 @@
         {{commentUnit.message}}
       </p>
     </div>
-    <app-responses [commentsParentList]="commentsList" [iParentComment]="i" (onNewParentResponse)="onNewResponseSaved($event)" ></app-responses>
+    <!-- <div class="container">
+      <form class="form-control" (ngSubmit)="saveResponseParent(responseToParent, i)">
+        <div class="row">
+          <div class="col-4 order-last">
+            <button type="submit" class="btn btn-primary my-4">Agregar Respuesta </button>
+          </div>
+          <div class="col-8 mb-2">
+            <textarea [(ngModel)]="responseToParent.message" class="form-control"
+              [name]="'responseParent'+commentsList[i].user.name.slice(0,3)+i"
+              [id]="'responseParent'+commentsList[i].user.name.slice(0,3)+i" cols="50"
+              rows="3"></textarea>
+          </div>
+        </div>
+      </form>
+    </div> -->
+    <app-responses [commentsParentList]="commentsList" [iParentComment]="i"
+      (onNewParentResponse)="onNewResponseSaved($event)"></app-responses>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Comment } from 'src/app/interfaces/comment.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { CommentService } from 'src/app/services/comment.service';
@@ -40,6 +41,7 @@ export class ResponsesComponent {
     message: 'To Child',
     response: []
   }
+
   constructor(
     private commentService:CommentService
   ) {}
@@ -55,6 +57,15 @@ export class ResponsesComponent {
       ...response,
       id: this.iParentComment
     }
-    this.onNewParentResponse.emit(commentUpdated);
+    this.commentsParentList[this.iParentComment].response.unshift(commentUpdated);
+  }
+
+  saveResponseChild( response:Comment, childCommentId:number ) {
+    let commentChild = this.commentService.insertResponseToComment( response , childCommentId );
+    commentChild = {
+      ...response,
+      id: childCommentId
+    }
+    this.commentsParentList[this.iParentComment].response[childCommentId].response.unshift(commentChild);
   }
 }
