@@ -1,0 +1,20 @@
+<div class="container w-60">
+  <h1 class="text-center"> Foro de Aval Buró</h1>
+  <form  (ngSubmit)="saveComment(comment)">
+    <div class="row">
+      <div class="col-3 text-center my-auto">
+        <img [src]="comment.user.profileImage" style="width: 75%;" class="img-thumbnail rounded-circle">
+        <h5>{{comment.user.name}}</h5>
+      </div>
+      <div class="col-5 my-auto">
+        <label for="userComment" class="form-label text-left">Comentario:</label>
+        <textarea class="form-control" [(ngModel)]="comment.message" id="userComment" name="userComment" aria-describedby="Comment for Aval Buro">
+        </textarea>
+        <div id="imageHelp" class="form-text">Deja tu comentario</div>
+      </div>
+      <div class="col-4 my-auto">
+        <button type="submit" class="btn btn-primary w-50">Enviar</button>
+      </div>
+    </div>
+  </form>
+</div>
