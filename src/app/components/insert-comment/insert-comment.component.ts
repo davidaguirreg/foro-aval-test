@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Comment } from '../../interfaces/comment.interface';
 import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/interfaces/user.interface';
+import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-insert-comment',
   templateUrl: './insert-comment.component.html',
@@ -21,6 +22,10 @@ export class InsertCommentComponent {
   }
   @Output()
   public onSaveComment: EventEmitter<Comment> = new EventEmitter<Comment>();
+
+  form:FormGroup = new FormGroup({
+
+  });
 
   constructor(
     private commentService: CommentService

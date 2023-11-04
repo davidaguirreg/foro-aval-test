@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Comment } from 'src/app/interfaces/comment.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { CommentService } from 'src/app/services/comment.service';
@@ -42,8 +42,21 @@ export class ResponsesComponent {
     response: []
   }
 
+  public formChildResponse:FormGroup = new FormGroup(
+    {
+      responseChild: new FormControl('')
+    }
+  )
+
+  public formParentResponse:FormGroup = new FormGroup(
+    {
+      parentResponse: new FormControl('')
+    }
+  )
+
   constructor(
-    private commentService:CommentService
+    private commentService:CommentService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -51,16 +64,20 @@ export class ResponsesComponent {
   }
 
   saveResponseParent( response:Comment ) : void {
+
     console.log({response});
     let commentUpdated = this.commentService.insertResponseToComment(response,this.iParentComment);
     commentUpdated = {
       ...response,
+      message: this.formParentResponse.value.parentResponse,
       id: this.iParentComment
     }
     this.commentsParentList[this.iParentComment].response.unshift(commentUpdated);
   }
 
   saveResponseChild( response:Comment, childCommentId:number ) {
+    console.log(this.formChildResponse.value.responseChild);
+
     let commentChild = this.commentService.insertResponseToComment( response , childCommentId );
     commentChild = {
       ...response,

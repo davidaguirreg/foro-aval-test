@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResponsesComponent } from './components/responses/responses.component';
 import { ListCommentsComponent } from './components/list-comments/list-comments.component';
 import { NewUserComponent } from './components/new-user/new-user.component';
@@ -21,7 +21,8 @@ import { InsertCommentComponent } from './components/insert-comment/insert-comme
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
