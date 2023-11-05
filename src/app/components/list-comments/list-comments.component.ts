@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Comment } from '../../interfaces/comment.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { CommentService } from 'src/app/services/comment.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-list-comments',
   templateUrl: './list-comments.component.html',
@@ -59,24 +60,60 @@ export class ListCommentsComponent {
   }
 
   constructor(
-    private commentService:CommentService
-  ) {}
+    private commentService:CommentService,
+    private route:ActivatedRoute,
+    private router: Router
+  ) {
+  }
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params)=>{
+      if(params){
+        console.log(params);
+        this.userRegistered.name = params['name'];
+        this.userRegistered.profileImage = params['profileImage'];
+      }else{
+        this.router.navigate(['new-user']);
+      }
+    })
+    this.commentService.getComments().subscribe((response)=>{
+      if(!response) return;
+      this.commentsList = [...response];
+    })
+  }
 
   onSavedNewComment(comment:Comment) {
     this.commentsList.unshift(comment);
+    this.commentService.insertUserComment(this.commentsList).subscribe(
+      (response)=>{
+        if(!response) return;
+        console.log("List comments guardados");
+
+      }
+    );
   }
 
   onNewResponseSaved( commentUpdated:Comment ):void {
     this.commentsList[commentUpdated.id!].response.unshift(commentUpdated);
+    this.commentService.insertUserComment(this.commentsList).subscribe(
+      (response)=>{
+        if(!response) return ;
+        console.log("Responses were saved");
+      }
+    )
+
   }
-  saveResponseParent( response:Comment, parentId:number ) : void {
-    console.log({response});
-    let commentUpdated = this.commentService.insertResponseToComment(response,parentId);
-    commentUpdated = {
-      ...response,
-      id: parentId
-    }
-    this.commentsList[commentUpdated.id!].response.unshift(commentUpdated);
-    // this.onNewParentResponse.emit(commentUpdated);
+
+
+  updateSavedResponses() {
+    console.log(this.commentsList);
+    this.commentService.insertUserComment(this.commentsList).subscribe(
+      (response)=>{
+        if(!response) return;
+        console.log("Responses Saved Child");
+
+      }
+    )
   }
+
 }

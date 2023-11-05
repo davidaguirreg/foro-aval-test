@@ -11,6 +11,8 @@ import { CommentService } from 'src/app/services/comment.service';
 })
 export class ResponsesComponent {
   @Input()
+  public nivel=0;
+  @Input()
   public iParentComment: number = 0;
   @Input()
   public commentsParentList:Comment[] = [
@@ -26,6 +28,10 @@ export class ResponsesComponent {
   ];
   @Output()
   public onNewParentResponse:EventEmitter<Comment> = new EventEmitter<Comment>();
+  @Output()
+  public onNewChildResponse:EventEmitter<Comment> = new EventEmitter<Comment>();
+  @Output()
+  public onBaseLevel:EventEmitter<Comment> = new EventEmitter<Comment>();
   @Input()
   public userRegistered:User = {
     name: 'Default',
@@ -55,8 +61,7 @@ export class ResponsesComponent {
   )
 
   constructor(
-    private commentService:CommentService,
-    private formBuilder: FormBuilder
+    private commentService:CommentService
   ) {}
 
   ngOnInit() {
@@ -66,23 +71,46 @@ export class ResponsesComponent {
   saveResponseParent( response:Comment ) : void {
 
     console.log({response});
-    let commentUpdated = this.commentService.insertResponseToComment(response,this.iParentComment);
-    commentUpdated = {
-      ...response,
-      message: this.formParentResponse.value.parentResponse,
-      id: this.iParentComment
+    response.user = this.userRegistered;
+    response.message = this.formParentResponse.value.parentResponse;
+    response.id=this.iParentComment;
+    //this.commentsParentList[this.iParentComment].response.unshift(commentUpdated);
+    if(this.nivel>=0){
+      this.onNewParentResponse.emit(response);
     }
-    this.commentsParentList[this.iParentComment].response.unshift(commentUpdated);
+    //TO-DO
+
+  }
+
+  onSaveParentResponse(){
+    if(this.nivel==0){
+      this.commentService.insertUserComment(this.commentsParentList).subscribe(
+        (response)=>{
+          if(!response) return ;
+          console.log("Response Parent Saved");
+        }
+      )
+    }else{
+      this.onNewParentResponse.emit();
+    }
+  }
+
+  onSaveChildResponse(){
+    if(this.nivel==1){
+      this.onBaseLevel.emit();
+    }else{
+      this.onNewChildResponse.emit();
+    }
   }
 
   saveResponseChild( response:Comment, childCommentId:number ) {
     console.log(this.formChildResponse.value.responseChild);
+    response.user=this.userRegistered;
+    response.message=this.formChildResponse.value.responseChild;
+    this.commentsParentList[this.iParentComment].response[childCommentId].response.unshift({...response});
 
-    let commentChild = this.commentService.insertResponseToComment( response , childCommentId );
-    commentChild = {
-      ...response,
-      id: childCommentId
+    if(this.nivel>0){
+      this.onNewChildResponse.emit();
     }
-    this.commentsParentList[this.iParentComment].response[childCommentId].response.unshift(commentChild);
   }
 }

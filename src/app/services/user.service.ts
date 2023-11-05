@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../interfaces/user.interface';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
@@ -16,25 +16,10 @@ export class UserService {
     private httpClient:HttpClient
   ) { }
 
-  addNewUser(user:User): User {
+  addNewUser(user:User): Observable<User> {
     if(!user) throw console.error('User undefined');
-    this.user = {...user};
-    // const saveUserUrl = environment.backendUrl + '/save'
-    // const saveUserUrl = 'environment.backendUrl'
-    let observableRegistered = new Observable<User>();
-    // observableRegistered = this.httpClient.post<User>(saveUserUrl,user);
-    let userRegistered:User = {
-      name: 'New User',
-      profileImage: 'New Image'
-    }
-    observableRegistered.subscribe(
-      (response) => {
-        if(!response) return;
-        userRegistered=response;
-
-      }
-    );
-    return userRegistered;
+    const saveUserUrl = environment.backendUrl + '/user'
+    return this.httpClient.post<User>(saveUserUrl,user);
   }
 
 }

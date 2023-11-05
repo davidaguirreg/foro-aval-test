@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Comment } from '../../interfaces/comment.interface';
 import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/interfaces/user.interface';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-insert-comment',
   templateUrl: './insert-comment.component.html',
@@ -16,25 +16,29 @@ export class InsertCommentComponent {
   }
 
   public comment: Comment = {
-    user: {...this.userSaved},
+    user: this.userSaved,
     message: 'I love Aval Buro',
     response: []
   }
   @Output()
   public onSaveComment: EventEmitter<Comment> = new EventEmitter<Comment>();
 
-  form:FormGroup = new FormGroup({
-
+  formComment:FormGroup = new FormGroup({
+    userComment: new FormControl('I love Aval Buro')
   });
 
   constructor(
     private commentService: CommentService
   ) {}
 
+
   saveComment(newComment: Comment): void {
-    const savedComment:Comment = this.commentService.insertUserComment(newComment);
-    if(!savedComment) return ;
-    this.onSaveComment.emit(savedComment);
+    newComment = {
+      user: {...this.userSaved},
+      message: this.formComment.value.userComment,
+      response:[]
+    }
+    this.onSaveComment.emit(newComment);
   }
 
 }

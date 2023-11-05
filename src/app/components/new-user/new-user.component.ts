@@ -19,12 +19,15 @@ export class NewUserComponent {
     private router:Router
   ){}
 
-  saveNewUser(user: User): void {
-    const userSaved = this.userService.addNewUser(user);
-    this.router.navigate(['forum']);
-    // if(userSaved){
-    //   this.router.navigate(['forum']);
-    // }
+  async saveNewUser(user: User) {
+    this.userService.addNewUser(user).subscribe(
+      {
+        next: (response)=>{
+          if(!response) return;
+          this.router.navigate(['forum'],{queryParams:{...response}});
+        }
+      }
+    );
   }
 
 

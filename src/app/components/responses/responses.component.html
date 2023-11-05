@@ -43,7 +43,7 @@
             </form>
           </div>
           <div class="container" *ngIf="answer.response.length>0">
-            <app-responses [commentsParentList]="commentsParentList[iParentComment].response" [iParentComment]="j"></app-responses>
+            <app-responses [userRegistered]="userRegistered" (onNewChildResponse)="onSaveChildResponse()" (onNewParentResponse)="onSaveParentResponse()" [commentsParentList]="commentsParentList[iParentComment].response" [iParentComment]="j" [nivel]="nivel+1"></app-responses>
           </div>
 
       </div>
