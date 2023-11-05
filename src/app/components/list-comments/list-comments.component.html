@@ -10,7 +10,7 @@
         {{commentUnit.message}}
       </p>
     </div>
-    <app-responses [commentsParentList]="commentsList" [iParentComment]="i"
-      (onNewParentResponse)="onNewResponseSaved($event)" [userRegistered]="userRegistered" (onBaseLevel)="updateSavedResponses()"></app-responses>
+    <app-responses [nivel]="0" [commentsParentList]="commentsList" [iParentComment]="i"
+      (onNewParentResponse)="onNewResponseSaved($event)" [userRegistered]="userRegistered" (onBaseLevel)="updateSavedResponses($event)"></app-responses>
   </div>
 </div>
