@@ -1,27 +1,17 @@
-# ForoAvalTest
+# PASOS PARA EJECUTAR APLICACIÓN FRONT END FORO AVAL BURO - PRUEBA TÉCNICA
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Requisitos
+- Tener instalado Node.js, mínimo la versión 18.16.0
+- Tener npm, mínimo la versión 9.5.1
+- Tener instalado angular CLI, mínimo la versión 16.2.3
+- Tener instalado GithubDesktop
+## Pasos para ejecutar la aplicación Front End Forum de Aval Buró - Prueba Técnica
+1. Ir al enlace del repositorio de GitHub: [FrontendAvalBuroForum](https://github.com/davidaguirreg/foro-aval-test)
+2. Clonar el repositorio utilizando GitHub Desktop
+3. Abrir un terminal con permisos de Administrador
+4. En el terminar utilizar el comando para dirigirse al directorio donde se clonó el repositorio
+5. Una vez que en el terminal esté en el directorio donde se clonó el repositorio, ejecutar el siguiente comando:
+`ng serve`
+6. Abrir el navegador web que usted desee (Sugerencia: Google Chrome)
+7. Colocal el siguiente enlace en el navegador: `http://localhost:4200/`
+## ¡¡¡Listo en el navegador podrás crear un usuario y dejar un comentario!!!
