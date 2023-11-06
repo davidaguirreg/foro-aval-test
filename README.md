@@ -9,9 +9,10 @@
 1. Ir al enlace del repositorio de GitHub: [FrontendAvalBuroForum](https://github.com/davidaguirreg/foro-aval-test)
 2. Clonar el repositorio utilizando GitHub Desktop
 3. Abrir un terminal con permisos de Administrador
-4. En el terminar utilizar el comando para dirigirse al directorio donde se clonó el repositorio
-5. Una vez que en el terminal esté en el directorio donde se clonó el repositorio, ejecutar el siguiente comando:
+4. En el terminal utilizar el comando para dirigirse al directorio donde se clonó el repositorio
+5. En el terminal ejecutar el comando `npm install`
+6. Una vez que en el terminal esté en el directorio donde se clonó el repositorio, ejecutar el siguiente comando:
 `ng serve`
-6. Abrir el navegador web que usted desee (Sugerencia: Google Chrome)
-7. Colocal el siguiente enlace en el navegador: `http://localhost:4200/`
+7. Abrir el navegador web que usted desee (Sugerencia: Google Chrome)
+8. Colocal el siguiente enlace en el navegador: `http://localhost:4200/`
 ## ¡¡¡Listo en el navegador podrás crear un usuario y dejar un comentario!!!
