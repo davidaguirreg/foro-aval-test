@@ -9,44 +9,18 @@ export class CommentService {
     private httpClient : HttpClient
   ) { }
 
-  insertUserComment(newComment: Comment): Comment {
-    if(!newComment) throw console.error('El comentario no ha sido especificado');
-    // let observableCommentSaved = new Observable<Comment>()
-    // observableCommentSaved = this.httpClient.post<Comment>(environment.backendUrl+'/comment',newComment);
-    let commentSaved:Comment = {
-      user: {
-        name: 'default',
-        profileImage:'default'
-      },
-      message: 'default',
-      response: []
-    }
-    commentSaved = {...newComment};
-    // observableCommentSaved.subscribe((response)=>{
-    //   if(!response) return ;
-    //   commentSaved = {...response};
-    // })
-    return commentSaved;
+  insertUserComment(newComments: Comment[]): Observable<Comment[]> {
+    if(!newComments) throw console.error('Comentarios no han sido especificados');
+    return this.httpClient.post<Comment[]>(environment.backendUrl+'/comments',newComments);
+
   }
 
-  insertResponseToComment( newComment:Comment , parentId:number ) : Comment {
-    let commentUpdated:Observable<Comment> = new Observable<Comment>();
+  insertResponseToComment( newComment:Comment[]) : Observable<Comment[]> {
 
-    let commentReturned:Comment = {
-      id:8,
-      user: {
-        name: 'default',
-        profileImage:'default'
-      },
-      message: 'default',
-      response: []
-    }
-    // commentUpdated = this.httpClient.put<Comment>(environment.backendUrl+'/'+parentId, newComment);
-    // commentUpdated.subscribe((response)=>{
-    //   if(!response) return ;
-    //   commentReturned = response;
-    // })
-    commentReturned = {...newComment};
-    return commentReturned;
+    return this.httpClient.post<Comment[]>(environment.backendUrl+'/comments',newComment);
+  }
+
+  getComments() : Observable<Comment[]> {
+    return this.httpClient.get<Comment[]>(environment.backendUrl+'/comments');
   }
 }

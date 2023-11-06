@@ -1,6 +1,6 @@
-<app-insert-comment (onSaveComment)="onSavedNewComment($event)"></app-insert-comment>
-<div class="container w-60 mt-3">
-  <div class="row border py-4 my-3" *ngFor="let commentUnit of commentsList; let i = index">
+<app-insert-comment [userSaved]="userRegistered" (onSaveComment)="onSavedNewComment($event)" ></app-insert-comment>
+<div class="container w-60 mt-3 rounded">
+  <div class="row border py-4 my-3 rounded" *ngFor="let commentUnit of commentsList; let i = index;">
     <div class="col-3 text-center my-auto">
       <img [src]="commentUnit.user.profileImage" style="width: 75%;" class="img-thumbnail rounded-circle">
       <h5>{{commentUnit.user.name}}</h5>
@@ -10,22 +10,7 @@
         {{commentUnit.message}}
       </p>
     </div>
-    <!-- <div class="container">
-      <form class="form-control" (ngSubmit)="saveResponseParent(responseToParent, i)">
-        <div class="row">
-          <div class="col-4 order-last">
-            <button type="submit" class="btn btn-primary my-4">Agregar Respuesta </button>
-          </div>
-          <div class="col-8 mb-2">
-            <textarea [(ngModel)]="responseToParent.message" class="form-control"
-              [name]="'responseParent'+commentsList[i].user.name.slice(0,3)+i"
-              [id]="'responseParent'+commentsList[i].user.name.slice(0,3)+i" cols="50"
-              rows="3"></textarea>
-          </div>
-        </div>
-      </form>
-    </div> -->
-    <app-responses [commentsParentList]="commentsList" [iParentComment]="i"
-      (onNewParentResponse)="onNewResponseSaved($event)"></app-responses>
+    <app-responses [nivel]="0" [commentsParentList]="commentsList" [iParentComment]="i"
+      (onNewParentResponse)="onNewResponseSaved($event)" [userRegistered]="userRegistered" (onBaseLevel)="updateSavedResponses($event)"></app-responses>
   </div>
 </div>

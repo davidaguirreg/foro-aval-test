@@ -1,5 +1,5 @@
-<div class="container">
-  <form class="form-control" [formGroup]="formParentResponse" (ngSubmit)="saveResponseParent(responseToParent)">
+<div class="container rounded w-60">
+  <form [formGroup]="formParentResponse" (ngSubmit)="saveResponseParent(responseToParent)">
     <div class="row">
       <div class="col-4 order-last">
         <button type="submit" class="btn btn-primary my-4" >Agregar Respuesta </button>
@@ -10,16 +10,16 @@
     </div>
   </form>
 </div>
-<div class="accordion" id="accordionAnswers" *ngIf="commentsParentList[iParentComment].response.length>0">
-  <div class="accordion-item">
+<div class="accordion w-60" id="accordionAnswers" *ngIf="commentsParentList[iParentComment].response.length>0">
+  <div class="accordion-item w-60">
     <div class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#accordion'+commentsParentList[iParentComment].user.name.slice(0,3)+iParentComment" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#accordion'+idAccordion" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
         Ver {{commentsParentList[iParentComment].response.length}} respuestas
       </button>
     </div>
-    <div  [id]="'accordion'+commentsParentList[iParentComment].user.name.slice(0,3)+iParentComment" class="accordion-collapse collapse show">
+    <div  [id]="'accordion'+idAccordion" class="accordion-collapse collapse show rounded">
       <div class="accordion-body">
-        <div class="row accordion border py-4 my-3" *ngFor="let answer of commentsParentList[iParentComment].response; let j = index">
+        <div class="row accordion border py-4 my-3 rounded" *ngFor="let answer of commentsParentList[iParentComment].response; let j = index">
           <div class="col-3 text-center my-auto">
             <img [src]="answer.user.profileImage" style="width: 75%;" class="img-thumbnail rounded-circle">
             <h5>{{answer.user.name}}</h5>
@@ -29,7 +29,7 @@
               {{answer.message}}
             </p>
           </div>
-          <div class="container" *ngIf="answer.response.length===0">
+          <div class="container w-60" *ngIf="answer.response.length===0">
 
             <form [formGroup]="formChildResponse" (ngSubmit)="saveResponseChild(responseToChild,j)">
               <div class="row">
@@ -42,8 +42,8 @@
               </div>
             </form>
           </div>
-          <div class="container" *ngIf="answer.response.length>0">
-            <app-responses [commentsParentList]="commentsParentList[iParentComment].response" [iParentComment]="j"></app-responses>
+          <div class="container w-60" *ngIf="answer.response.length>0">
+            <app-responses [userRegistered]="userRegistered" (onNewChildResponse)="onSaveChildResponse($event)" (onNewParentResponse)="onSaveParentResponse($event)" [commentsParentList]="commentsParentList[iParentComment].response" [iParentComment]="j" [nivel]="nivel+1"></app-responses>
           </div>
 
       </div>

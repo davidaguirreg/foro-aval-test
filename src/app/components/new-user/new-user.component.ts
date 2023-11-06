@@ -10,8 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NewUserComponent {
   public newUser:User = {
-    name: 'Default',
-    profileImage: 'https://cdn.pixabay.com/photo/2023/01/28/20/23/ai-generated-7751688_960_720.jpg'
+    name: ' ',
+    profileImage: ''
   }
 
   constructor(
@@ -19,12 +19,15 @@ export class NewUserComponent {
     private router:Router
   ){}
 
-  saveNewUser(user: User): void {
-    const userSaved = this.userService.addNewUser(user);
-    this.router.navigate(['forum']);
-    // if(userSaved){
-    //   this.router.navigate(['forum']);
-    // }
+  async saveNewUser(user: User) {
+    this.userService.addNewUser(user).subscribe(
+      {
+        next: (response)=>{
+          if(!response) return;
+          this.router.navigate(['forum'],{queryParams:{...response}});
+        }
+      }
+    );
   }
 
 

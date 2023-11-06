@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Comment } from 'src/app/interfaces/comment.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { CommentService } from 'src/app/services/comment.service';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-responses',
@@ -11,7 +12,9 @@ import { CommentService } from 'src/app/services/comment.service';
 })
 export class ResponsesComponent {
   @Input()
-  public iParentComment: number = 0;
+  public nivel!:number;
+  @Input()
+  public iParentComment: number = 1;
   @Input()
   public commentsParentList:Comment[] = [
     {
@@ -25,7 +28,11 @@ export class ResponsesComponent {
     }
   ];
   @Output()
-  public onNewParentResponse:EventEmitter<Comment> = new EventEmitter<Comment>();
+  public onNewParentResponse:EventEmitter<Comment[]> = new EventEmitter<Comment[]>();
+  @Output()
+  public onNewChildResponse:EventEmitter<Comment[]> = new EventEmitter<Comment[]>();
+  @Output()
+  public onBaseLevel:EventEmitter<Comment[]> = new EventEmitter<Comment[]>();
   @Input()
   public userRegistered:User = {
     name: 'Default',
@@ -54,35 +61,64 @@ export class ResponsesComponent {
     }
   )
 
+  public idAccordion:string = uuid();
+
   constructor(
-    private commentService:CommentService,
-    private formBuilder: FormBuilder
+    private commentService:CommentService
   ) {}
 
   ngOnInit() {
-    console.log(this.commentsParentList[this.iParentComment]);
   }
 
   saveResponseParent( response:Comment ) : void {
-
-    console.log({response});
-    let commentUpdated = this.commentService.insertResponseToComment(response,this.iParentComment);
-    commentUpdated = {
+    response = {
       ...response,
-      message: this.formParentResponse.value.parentResponse,
-      id: this.iParentComment
+      user:this.userRegistered,
+      message:this.formParentResponse.value.parentResponse,
+      id:this.iParentComment
     }
-    this.commentsParentList[this.iParentComment].response.unshift(commentUpdated);
+    this.commentsParentList[this.iParentComment].response.unshift(response);
+    if(this.nivel>=0){
+      this.onNewParentResponse.emit(this.commentsParentList);
+    }
+  }
+
+  onSaveParentResponse(response:Comment[]){
+    if(this.nivel==0){
+
+      this.commentService.insertUserComment(this.commentsParentList).subscribe(
+        (response)=>{
+          if(!response) return ;
+          console.log("Response Parent Saved");
+        }
+      )
+    }else{
+      this.onNewParentResponse.emit(response);
+    }
+  }
+
+  onSaveChildResponse(commentsUpdated:Comment[]){
+    if(this.nivel==0){
+      this.onBaseLevel.emit(this.commentsParentList);
+    }else{
+      this.onNewChildResponse.emit(this.commentsParentList);
+    }
   }
 
   saveResponseChild( response:Comment, childCommentId:number ) {
-    console.log(this.formChildResponse.value.responseChild);
-
-    let commentChild = this.commentService.insertResponseToComment( response , childCommentId );
-    commentChild = {
+    response.user=this.userRegistered;
+    response.message=this.formChildResponse.value.responseChild;
+    response = {
       ...response,
-      id: childCommentId
+      user: this.userRegistered,
+      message: this.formChildResponse.value.responseChild
     }
-    this.commentsParentList[this.iParentComment].response[childCommentId].response.unshift(commentChild);
+
+    this.commentsParentList[this.iParentComment].response[childCommentId].response.unshift({...response});
+    if(this.nivel===0){
+      this.onBaseLevel.emit(this.commentsParentList);
+    }else{
+      this.onNewChildResponse.emit(this.commentsParentList);
+    }
   }
 }
