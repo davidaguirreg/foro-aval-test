@@ -15,5 +15,5 @@
 7. Una vez que en el terminal esté en el directorio donde se clonó el repositorio, ejecutar el siguiente comando:
 `ng serve`
 8. Una vez que se haya ejecutado exitosamente el comando anterior, abrir el navegador web que usted desee (Sugerencia: Google Chrome)
-9. Colocal el siguiente enlace en el navegador: `http://localhost:4200/`
+9. Colocar el siguiente enlace en el navegador: `http://localhost:4200/`
 ## ¡¡¡Listo en el navegador podrás crear un usuario y dejar un comentario!!!
