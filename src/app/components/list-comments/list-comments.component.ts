@@ -10,43 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListCommentsComponent {
   @Input()
-  public commentsList : Comment[] = []
-  //   {
-  //     user: {
-  //       name: 'David Aguirre',
-  //       profileImage: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
-  //     },
-  //     message: 'Hey What is up folk',
-  //     response: [
-  //       {
-  //         user: {
-  //           name: 'Hector Lavoe',
-  //           profileImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV-PPHbiN5UY9oUF6zVFqu3L0QfSB7x3S_g7OuEJgZZ34JyZg1FHH1B6pk-GQntoH80v4&usqp=CAU'
-  //         },
-  //         message: 'Hey what u mean ?',
-  //         response:[
-  //           {
-  //             user: {
-  //               name: 'Pedro Juan',
-  //               profileImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR81P6my9nAe_7zKcpys_FvpjWc6WBtGBB2SBWIWA7gfHFxXR4NSlKIsKpbLfi0MKlUSw0&usqp=CAU'
-  //             },
-  //             message: 'Libre como el viento my friend.',
-  //             response: []
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     user: {
-  //       name: 'Carmine 6899',
-  //       profileImage: 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp'
-  //     },
-  //     message: 'Hey Why did u come to this place?',
-  //     response: []
-  //   }
-  // ]
-
+  public commentsList : Comment[] = [];
   @Input()
   public userRegistered:User = {
     name: 'Default',
@@ -69,7 +33,6 @@ export class ListCommentsComponent {
   ngOnInit() {
     this.route.queryParams.subscribe((params)=>{
       if(params){
-        console.log(params);
         this.userRegistered.name = params['name'];
         this.userRegistered.profileImage = params['profileImage'];
       }else{
@@ -107,7 +70,6 @@ export class ListCommentsComponent {
 
 
   updateSavedResponses(childResponses:Comment[]) {
-    console.log(this.commentsList);
     this.commentsList = [...childResponses];
     this.commentService.insertUserComment(this.commentsList).subscribe(
       (response)=>{

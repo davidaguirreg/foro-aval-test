@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Comment } from 'src/app/interfaces/comment.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { CommentService } from 'src/app/services/comment.service';
@@ -68,8 +68,6 @@ export class ResponsesComponent {
   ) {}
 
   ngOnInit() {
-    console.log("Nivel del Componenete = "+this.nivel);
-
   }
 
   saveResponseParent( response:Comment ) : void {
@@ -80,19 +78,13 @@ export class ResponsesComponent {
       message:this.formParentResponse.value.parentResponse,
       id:this.iParentComment
     }
-
-    console.log("Nivel="+this.nivel);
     this.commentsParentList[this.iParentComment].response.unshift(response);
     if(this.nivel>=0){
       this.onNewParentResponse.emit(this.commentsParentList);
     }
-    //TO-DO
-
   }
 
   onSaveParentResponse(response:Comment[]){
-    console.log("Entrado A Onsaveparent response nivel = "+this.nivel);
-
     if(this.nivel==0){
 
       this.commentService.insertUserComment(this.commentsParentList).subscribe(
@@ -107,7 +99,6 @@ export class ResponsesComponent {
   }
 
   onSaveChildResponse(commentsUpdated:Comment[]){
-    console.log("Entrado a save child response");
     this.commentsParentList=[...commentsUpdated];
     if(this.nivel==0){
       this.onBaseLevel.emit(this.commentsParentList);
@@ -133,9 +124,5 @@ export class ResponsesComponent {
     }else{
       this.onNewChildResponse.emit(this.commentsParentList);
     }
-
-    // if(this.nivel>=0){
-    //   this.onNewChildResponse.emit(this.commentsParentList);
-    // }
   }
 }
