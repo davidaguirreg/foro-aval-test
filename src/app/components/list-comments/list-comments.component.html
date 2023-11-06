@@ -1,6 +1,6 @@
 <app-insert-comment [userSaved]="userRegistered" (onSaveComment)="onSavedNewComment($event)" ></app-insert-comment>
-<div class="container w-60 mt-3">
-  <div class="row border py-4 my-3" *ngFor="let commentUnit of commentsList; let i = index;">
+<div class="container w-60 mt-3 rounded">
+  <div class="row border py-4 my-3 rounded" *ngFor="let commentUnit of commentsList; let i = index;">
     <div class="col-3 text-center my-auto">
       <img [src]="commentUnit.user.profileImage" style="width: 75%;" class="img-thumbnail rounded-circle">
       <h5>{{commentUnit.user.name}}</h5>

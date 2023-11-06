@@ -71,7 +71,6 @@ export class ResponsesComponent {
   }
 
   saveResponseParent( response:Comment ) : void {
-    console.log({response});
     response = {
       ...response,
       user:this.userRegistered,

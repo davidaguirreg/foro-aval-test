@@ -3,6 +3,7 @@ import { Comment } from '../../interfaces/comment.interface';
 import { CommentService } from 'src/app/services/comment.service';
 import { User } from 'src/app/interfaces/user.interface';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-insert-comment',
   templateUrl: './insert-comment.component.html',
@@ -28,7 +29,7 @@ export class InsertCommentComponent {
   });
 
   constructor(
-    private commentService: CommentService
+    private router:Router
   ) {}
 
 
@@ -41,4 +42,7 @@ export class InsertCommentComponent {
     this.onSaveComment.emit(newComment);
   }
 
+  changeUser():void {
+    this.router.navigate(['new-user']);
+  }
 }

@@ -10,8 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NewUserComponent {
   public newUser:User = {
-    name: 'Default',
-    profileImage: 'https://cdn.pixabay.com/photo/2023/01/28/20/23/ai-generated-7751688_960_720.jpg'
+    name: ' ',
+    profileImage: ''
   }
 
   constructor(
