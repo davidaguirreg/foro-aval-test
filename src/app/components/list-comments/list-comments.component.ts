@@ -57,7 +57,6 @@ export class ListCommentsComponent {
   }
 
   onNewResponseSaved( commentUpdated:Comment[] ):void {
-    //this.commentsList[commentUpdated.id!].response.unshift({...commentUpdated});
     this.commentsList = [...commentUpdated];
     this.commentService.insertUserComment(this.commentsList).subscribe(
       (response)=>{

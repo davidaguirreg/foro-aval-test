@@ -99,7 +99,6 @@ export class ResponsesComponent {
   }
 
   onSaveChildResponse(commentsUpdated:Comment[]){
-    this.commentsParentList=[...commentsUpdated];
     if(this.nivel==0){
       this.onBaseLevel.emit(this.commentsParentList);
     }else{
@@ -108,7 +107,6 @@ export class ResponsesComponent {
   }
 
   saveResponseChild( response:Comment, childCommentId:number ) {
-    console.log("nivel="+this.nivel);
     response.user=this.userRegistered;
     response.message=this.formChildResponse.value.responseChild;
     response = {
@@ -116,7 +114,6 @@ export class ResponsesComponent {
       user: this.userRegistered,
       message: this.formChildResponse.value.responseChild
     }
-    console.log("Arreglo en hijo"+this.commentsParentList[this.iParentComment].response[childCommentId].response);
 
     this.commentsParentList[this.iParentComment].response[childCommentId].response.unshift({...response});
     if(this.nivel===0){
