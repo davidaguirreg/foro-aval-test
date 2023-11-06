@@ -10,9 +10,10 @@
 2. Clonar el repositorio utilizando GitHub Desktop
 3. Abrir un terminal con permisos de Administrador
 4. En el terminal utilizar el comando para dirigirse al directorio donde se clonó el repositorio
-5. En el terminal ejecutar el comando `npm install`
-6. Una vez que en el terminal esté en el directorio donde se clonó el repositorio, ejecutar el siguiente comando:
+5. Verificar que el antivirus no interfiera con el proceso. (Se recomienda desactivar el antivirus)
+6. En el terminal ejecutar el comando `npm install`
+7. Una vez que en el terminal esté en el directorio donde se clonó el repositorio, ejecutar el siguiente comando:
 `ng serve`
-7. Abrir el navegador web que usted desee (Sugerencia: Google Chrome)
-8. Colocal el siguiente enlace en el navegador: `http://localhost:4200/`
+8. Abrir el navegador web que usted desee (Sugerencia: Google Chrome)
+9. Colocal el siguiente enlace en el navegador: `http://localhost:4200/`
 ## ¡¡¡Listo en el navegador podrás crear un usuario y dejar un comentario!!!
